@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') %>
+<h1>CampGrounds</h1>
+
+<a href="/campgrounds/new">Add New Campground</a>
+<% for (let campground of campgrounds){ %>
+
+<div class="card mt-2 mb-2">
+  <div class="card-body">
+    <h5 class="card-title"><%=campground.title%></h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      Location: <%= campground.location %>
+    </h6>
+    <p class="card-text">Description: <%= campground.description %></p>
+    <a href="/campgrounds/<%=campground._id%>" class="card-link">Open Card</a>
+  </div>
+</div>
+
+<div class="card">
+  <img src="<%= campground.image %>" class="card-img-top" alt="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>
+<% } %>

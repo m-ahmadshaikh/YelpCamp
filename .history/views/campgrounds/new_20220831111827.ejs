@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') %>
+<form action="/campgrounds/new" method="post">
+  <ul class="flex-outer">
+    <li>
+      <input type="text" id="title" name="title" required />
+    </li>
+
+    <li>
+      <label for="price">Price</label>
+      <input type="Number" id="price" name="price" required />
+    </li>
+
+    <li>
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" required />
+    </li>
+
+    <li>
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required />
+    </li>
+    <li>
+      <button>Create Product</button>
+    </li>
+  </ul>
+  <!-- Different sized labels for horizontal form can be used with the help of .col-form-label-{sm|lg} class -->
+  <div class="row mb-3">
+    
+    <label class="col-sm-2 col-form-label col-form-label-lg" for="title">Title</label>
+    <div class="col-sm-10">
+      <input
+        type="email"
+        class="form-control form-control-lg"
+        id="colFormLabelLg"
+        placeholder="col-form-label-lg"
+      />
+    </div>
+  </div>
+</form>

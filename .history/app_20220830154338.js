@@ -1,0 +1,34 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+const mongoose = require('mongoose');
+const Campground = require('./models/campground');
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb://localhost:27017/yelp-camp');
+  console.log('Connected Mongodb');
+}
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.listen(3000, () => {
+  console.log('Listening at 3000');
+});
+
+app.get('/campground', async (req, res) => {
+  const campgrounds = await Campground.find({});
+
+  res.render('home', { campgrounds });
+});
+
+app.get('/campground/:id', async (req, res) => {
+  const { id } = req.params;
+  const campground = await Campground.findById(id);
+
+  res.render('campground', { campground });
+});
+
+
+app.patch('/campground/:id/update')

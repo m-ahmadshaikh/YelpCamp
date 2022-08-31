@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Campground</title>
+    <style>
+      form {
+        max-width: 50%;
+        margin: 0 auto;
+      }
+      .flex-outer li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 2rem 0;
+      }
+      .flex-outer > li > label {
+        flex: 1 0 120px;
+        max-width: 220px;
+      }
+      .flex-outer > li > label + * {
+        flex: 1 0 120px;
+      }
+      .flex-outer li a {
+        text-decoration: none;
+      }
+      .flex-outer li button,
+      .flex-outer li a {
+        margin: 0 auto;
+        padding: 8px 16px;
+        border: none;
+        background: #333;
+        color: #f2f2f2;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        border-radius: 2px;
+      }
+      input:invalid {
+        border: 2px dashed red;
+      }
+
+      input:invalid:required {
+        background-image: linear-gradient(to right, pink, lightgreen);
+      }
+
+      input:valid {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/campground/:<%=camground._id%> /update" method="post">
+      <ul class="flex-outer">
+        <li>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required />
+        </li>
+
+        <li>
+          <label for="price">Price</label>
+          <input type="Number" id="price" name="price" required />
+        </li>
+
+        <li>
+          <label for="description">Description</label>
+          <input type="text" id="description" name="description" required />
+        </li>
+
+        <li>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" required />
+        </li>
+        <li>
+          <button>Create Product</button>
+        </li>
+      </ul>
+    </form>
+  </body>
+</html>

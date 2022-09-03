@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+require('mongoose-type-url');
+
+const campgroundSchema = new Schema({
+  title: { type: String, required: "title can't be empty" },
+  price: {
+    type: Number,
+    min: [0, 'Price cannot be negative'],
+  },
+  image: {
+    type: mongoose.SchemaTypes.Url,
+  },
+  description: String,
+  location: String,
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+});
+
+campgroundSchema.pre('findOneAndDelete', function(req,res,next) {
+  const err = new Error('something went wrong');
+ 
+  next(err);
+});
+
+module.exports = mongoose.model('Campground', campgroundSchema);

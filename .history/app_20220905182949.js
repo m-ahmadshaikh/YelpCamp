@@ -106,6 +106,6 @@ app.use((err, req, res, next) => {
   res.status(status).render('error', { status, message, name, stack });
 });
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Listening at ${port} `);
+app.listen(3000, () => {
+  console.log('Listening at 3000');
 });

@@ -1,9 +1,10 @@
 const Campground = require('../models/campground');
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
-const { cloudinary } = require('../cloudinary');
+const { cloudinary } = require("../cloudinary");
 
+const { cloudinary } = require('../cloudinary');
 module.exports.index = async (req, res, next) => {
   const campgrounds = await Campground.find({});
   res.render('campgrounds/index', { campgrounds });
@@ -16,12 +17,8 @@ module.exports.renderNewForm = async (req, res, next) => {
 module.exports.createCampground = async (req, res, next) => {
   const { campground } = req.body;
 
-  const geoData = await geocoder
-    .forwardGeocode({
-      query: req.body.campground.location,
-      limit: 1,
-    })
-    .send();
+  let geoData = await geo.geocode('mapbox.places', campground.location);
+
   campground.images = req.files.map((f) => ({
     filename: f.filename,
     url: f.path,
@@ -31,7 +28,7 @@ module.exports.createCampground = async (req, res, next) => {
     return next(new ExpressError('400', 'Cannot Create a new campground'));
   }
   const newCamp = new Campground(campground);
-  newCamp.geometry = geoData.body.features[0].geometry;
+  newCamp.geometry = geoData.features[0].geometry;
   await newCamp.save();
   if (!newCamp) {
     return next(new MongoError(400, 'Cannot Create the new campground'));

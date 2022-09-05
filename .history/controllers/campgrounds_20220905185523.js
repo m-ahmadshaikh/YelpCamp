@@ -31,7 +31,7 @@ module.exports.createCampground = async (req, res, next) => {
     return next(new ExpressError('400', 'Cannot Create a new campground'));
   }
   const newCamp = new Campground(campground);
-  newCamp.geometry = geoData.body.features[0].geometry;
+  newCamp.geometry = geoData.features[0].geometry;
   await newCamp.save();
   if (!newCamp) {
     return next(new MongoError(400, 'Cannot Create the new campground'));

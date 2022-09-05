@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %>
+<style>
+  #map {
+    height: 200px;
+  }
+  .mapboxgl-popup {
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+</style>
+<div class="map"></div>
+<h1>CampGrounds</h1>
+
+<a href="/campgrounds/new">Add New Campground</a>
+<% for (let campground of campgrounds){ %>
+
+<div class="card mt-3 mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <% if (campground.images.length) { %>
+
+      <img
+        src="<%= campground.images[0].url %>"
+        class="img-fluid"
+        alt="card-img-top"
+      />
+      <% } %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%=campground.title%></h5>
+        <p class="card-text">Description: <%= campground.description %></p>
+        <p class="card-text">Location: <%= campground.location %></p>
+
+        <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>"
+          >View <%=campground.title%></a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const campground = <%-JSON.stringify(campground)%>;
+</script>
+<script src="/javascripts/showMapboxMap.js"></script>
